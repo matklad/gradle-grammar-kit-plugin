@@ -10,6 +10,13 @@ class GenerateParser extends BaseTask {
     GenerateParser() {
         setMain("org.intellij.grammar.Main");
         project.afterEvaluate {
+            if (!pathToParser) {
+                throw new IllegalArgumentException("Please set `pathToParser`")
+            }
+            if (!pathToPsiRoot) {
+                throw new IllegalArgumentException("Please set `pathToPsiRoot`")
+            }
+
             def bnfFile = project.file(source)
             inputs.file bnfFile
             def effectiveTargetRoot = getEffectiveTargetRoot()

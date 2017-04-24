@@ -9,6 +9,9 @@ class GenerateLexer extends BaseTask {
 
     GenerateLexer() {
         project.afterEvaluate({
+            if (!targetClass) {
+                throw new IllegalArgumentException("Please set `targetClass`")
+            }
             setMain("jflex.Main")
             def flexFile = project.file(source)
             inputs.file flexFile
