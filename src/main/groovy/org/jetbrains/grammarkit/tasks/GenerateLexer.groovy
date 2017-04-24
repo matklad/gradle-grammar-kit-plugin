@@ -1,17 +1,16 @@
 package org.jetbrains.grammarkit.tasks
 
+import org.gradle.api.tasks.Input
+
 class GenerateLexer extends BaseTask {
 
     def targetDir
-    def targetClass
+    @Input def targetClass
     def source
     def skeleton
 
     GenerateLexer() {
         project.afterEvaluate({
-            if (!targetClass) {
-                throw new IllegalArgumentException("Please set `targetClass`")
-            }
             setMain("jflex.Main")
             def flexFile = project.file(source)
             inputs.file flexFile
